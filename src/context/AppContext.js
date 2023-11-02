@@ -29,8 +29,8 @@ export const AppReducer = (state, action) => {
                 return {
                     ...state
                 }
-            }
-            case 'RED_EXPENSE':
+            };
+        case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
                         currentExp.cost =  currentExp.cost - action.payload.cost;
@@ -43,19 +43,31 @@ export const AppReducer = (state, action) => {
                     ...state,
                     expenses: [...red_expenses],
                 };
-            case 'DELETE_EXPENSE':
+        case 'SUBTRACT_EXPENSE':
+            let current_budget = 0;
+            current_budget = state.expenses.reduce(
+                (previousExp, currentExp) => {
+                    return previousExp + currentExp.cost
+                },0
+            );
+            current_budget = current_budget + action.payload.cost;
             action.type = "DONE";
-            state.expenses.map((currentExp)=> {
-                if (currentExp.name === action.payload) {
-                    budget = state.budget + currentExp.cost
-                    currentExp.cost =  0;
+            if(current_budget <= state.budget) {
+                current_budget = 0;
+                state.expenses.map((currentExp)=> {
+                    if(currentExp.name === action.payload.name) {
+                        currentExp.cost = currentExp.cost - action.payload.cost;
+                    }
+                    return currentExp
+                });
+                return {
+                    ...state,
+                };
+            } else {
+                alert("Cannot decrease the allocation! Too low");
+                return {
+                    ...state
                 }
-                return currentExp
-            })
-            action.type = "DONE";
-            return {
-                ...state,
-                budget
             };
         case 'SET_BUDGET':
             action.type = "DONE";
