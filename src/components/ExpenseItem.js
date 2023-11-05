@@ -33,13 +33,11 @@ const ExpenseItem = (props) => {
     }
 
     return (
-    
         <tr>
         <td>{props.name}</td>
         <td>£{props.cost}</td>
         <td><FcPlus  size="30px" onClick={event=> increaseAllocation(props.name)}>+</FcPlus></td>
         <td><FaMinusCircle color="red" size="30px" onClick={event=> decreaseAllocation(props.name)}>-</FaMinusCircle></td>
-       
         </tr>
     );
 };
