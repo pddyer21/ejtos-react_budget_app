@@ -4,13 +4,13 @@ import React from 'react';
 const Currency = () => {
     
     return (
-        <div className='alert alert-info'>
+        <div className='alert alert-success'>
             <select className="custom-select" id="inputGroupCurr" >
-                            <option defaultValue>Choose...</option>
+                            <option defaultValue>£ Pound</option>
                             <option value="Marketing" name="marketing"> $ Dollar</option>
                             <option value="Sales" name="sales">£ Pound</option>
-                            <option value="Finance" name="finance">Euro</option>
-                            <option value="HR" name="hr">Rupee</option>
+                            <option value="Finance" name="finance">&#8364; Euro</option>
+                            <option value="HR" name="hr">&#8377; Rupee</option>
             </select>
 
         </div>
