@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 
-
-
 const Currency = () => {
-    const [Curr, setCurr] = useState('');
+    const [selectedCurrency, setSelectedCurrency] = useState('');
 
+    const handleCurrencyChange = (event) => {
+        setSelectedCurrency(event.target.value);
+    };
 
     
     return (
    
-            <div>  
-                <label className="alert alert-success" htmlFor="inputGroupCurr" >Currency
-                    <select className="alert alert-success" id="inputGroupCurr" onChange={(event) => setCurr(event.target.value)}>
-                                    <option value="$" name="Dollar" > $ Dollar</option>
-                                    <option value="£" name="Pound" >£ Pound</option>
-                                    <option value="&#8364; Euro" name="Euro" >&#8364; Euro</option>
-                                    <option value="&#8377; Rupee" name="Rupee" >&#8377; Rupee</option>
-                    </select>
-                </label>
-            </div> 
+        <div className="select-wrap">  
+                <label className="alert alert-success" htmlFor="inputGroupCurr" style={{color:'white', backgroundColor:'#93E499'}} >Currency 
+                <select className="Curr-selector" id="inputGroupCurr"  style={{backgroundColor:'#93E499', borderColor: '#93E499', color: 'white'}} onChange={handleCurrencyChange} value={selectedCurrency} text={selectedCurrency.text}>
+                    <option id="op1" value="$" name="Dollar" style={{color:'black', width:"100%"}}>$ Dollar</option>
+                    <option id="op2" value="£" name="Pound" style={{color:'black', width:"100%"}}>£ Pound</option>
+                    <option id="op3" value="&#8364;" name="Euro" style={{color:'black', width:"100%"}}>&#8364; Euro</option>
+                    <option id="op4" value="&#8377;" name="Rupee"style={{color:'black', width:"100%"}}>&#8377; Rupee</option>
+                </select>
+                </label>       
+        </div> 
     )
             
 };
