@@ -43,32 +43,6 @@ export const AppReducer = (state, action) => {
                     ...state,
                     expenses: [...red_expenses],
                 };
-        case 'SUBTRACT_EXPENSE':
-            let current_budget = 0;
-            current_budget = state.expenses.reduce(
-                (previousExp, currentExp) => {
-                    return previousExp + currentExp.cost
-                },0
-            );
-            current_budget = current_budget + action.payload.cost;
-            action.type = "DONE";
-            if(current_budget <= state.budget) {
-                current_budget = 0;
-                state.expenses.map((currentExp)=> {
-                    if(currentExp.name === action.payload.name) {
-                        currentExp.cost = currentExp.cost - action.payload.cost;
-                    }
-                    return currentExp
-                });
-                return {
-                    ...state,
-                };
-            } else {
-                alert("Cannot decrease the allocation! Too low");
-                return {
-                    ...state
-                }
-            };
         case 'SET_BUDGET':
             action.type = "DONE";
             state.budget = action.payload;
@@ -90,13 +64,13 @@ export const AppReducer = (state, action) => {
 
 // 1. Sets the initial state when the app loads
 const initialState = {
-    budget: 2000,
+    budget: 20000,
     expenses: [
-        { id: "Marketing", name: 'Marketing', cost: 50 },
-        { id: "Finance", name: 'Finance', cost: 300 },
-        { id: "Sales", name: 'Sales', cost: 70 },
-        { id: "Human Resource", name: 'Human Resource', cost: 40 },
-        { id: "IT", name: 'IT', cost: 500 },
+        { id: "Marketing", name: 'Marketing', cost: 5000 },
+        { id: "Finance", name: 'Finance', cost: 2000 },
+        { id: "Sales", name: 'Sales', cost: 3000 },
+        { id: "Human Resource", name: 'Human Resource', cost: 2000 },
+        { id: "IT", name: 'IT', cost: 4000 },
     ],
     currency: '£'
 };

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const AllocationForm = (props) => {
-    const { dispatch, remaining, currency  } = useContext(AppContext);
+    const { dispatch, remaining, currency, expenses  } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
@@ -10,27 +10,28 @@ const AllocationForm = (props) => {
 
     const submitEvent = () => {
 
-            if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
-                setCost("");
-                return;
-            }
+        if(cost > remaining) {
+            alert("The value cannot exceed remaining funds "+currency+remaining);
+            setCost("");
+            return;
+        }
+            const expense = {
+                name: name,
+                cost: parseInt(cost),
+            };
 
-        const expense = {
-            name: name,
-            cost: parseInt(cost),
-        };
-        if(action === "Reduce") {
-            dispatch({
-                type: 'RED_EXPENSE',
-                payload: expense,
-            });
-        } else {
+            if(action === "Reduce") {
                 dispatch({
-                    type: 'ADD_EXPENSE',
+                    type: 'RED_EXPENSE',
                     payload: expense,
                 });
-            }
+            } else {
+                    dispatch({
+                        type: 'ADD_EXPENSE',
+                        payload: expense,
+                    });
+                }
+              
     };
 
     return (
@@ -59,7 +60,7 @@ const AllocationForm = (props) => {
                     </select>
 
                     <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
-                        <label className="input-group-text" htmlFor="inputGroupAlloc" style={{marginRight: "0px"}}>{currency}}</label>
+                        <label className="input-group-text" htmlFor="inputGroupAlloc" style={{marginRight: "0px"}}>{currency}</label>
                     </div>
                         <span></span>
                         <input
