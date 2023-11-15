@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 
 const Currency = () => {
-    const [selectedCurrency, setSelectedCurrency] = useState('');
-
+    const { currency } = useContext(AppContext);
+    const [selectedCurrency, setSelectedCurrency] = useState(currency);
+ 
     const handleCurrencyChange = (event) => {
         setSelectedCurrency(event.target.value);
     };
 
+   
     
     return (
    
@@ -18,7 +21,7 @@ const Currency = () => {
                     <option id="op3" value="&#8364;" name="Euro" style={{color:'black', width:"100%"}}>&#8364; Euro</option>
                     <option id="op4" value="&#8377;" name="Rupee"style={{color:'black', width:"100%"}}>&#8377; Rupee</option>
                 </select>
-                </label>       
+                </label>                      
         </div> 
     )
             
