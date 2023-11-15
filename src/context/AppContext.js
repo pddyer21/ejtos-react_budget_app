@@ -98,12 +98,7 @@ const initialState = {
         { id: "Human Resource", name: 'Human Resource', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
     ],
-    currency: [
-        {id: '£', name: "Pound"},
-        {id: "$", name: "Dollar"},
-        {id: "&#8364;", name: "Euro"},
-        {id:"&#8377;", name:"Rupee"}
-    ]
+    currency: '£'
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -116,6 +111,7 @@ export const AppProvider = (props) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
     let remaining = 0;
 
+    
     if (state.expenses) {
             const totalExpenses = state.expenses.reduce((total, item) => {
             return (total = total + item.cost);
